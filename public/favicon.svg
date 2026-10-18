@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="24" fill="#171615" />
+  <text
+    x="64"
+    y="78"
+    fill="#f08a62"
+    font-family="ui-sans-serif, system-ui, sans-serif"
+    font-size="46"
+    font-weight="600"
+    text-anchor="middle"
+  >AP</text>
+</svg>

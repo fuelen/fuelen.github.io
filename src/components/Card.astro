@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { toTransitionName } from "@/utils/toTransitionName";
+import Datetime from "./Datetime.astro";
+
+type Props = {
+  variant?: "h2" | "h3";
+} & CollectionEntry<"posts">;
+
+const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+
+const { title, description, ...props } = data;
+---
+
+<li
+  class="border-border grid gap-3 border-t py-7 sm:grid-cols-[8.5rem_1fr] sm:gap-8 sm:py-9"
+>
+  <Datetime {...props} class="pt-1" />
+  <div>
+    <a
+      href={getPostUrl(id, filePath, Astro.currentLocale)}
+      class="group inline-block"
+    >
+      <Heading
+        transition:name={toTransitionName(id)}
+        class="text-foreground group-hover:text-accent text-xl leading-snug font-semibold tracking-tight transition-colors sm:text-2xl"
+      >
+        {title}
+      </Heading>
+    </a>
+    <p class="text-muted-foreground mt-2 max-w-2xl leading-relaxed">
+      {description}
+    </p>
+  </div>
+</li>

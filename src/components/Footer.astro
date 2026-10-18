@@ -1,0 +1,42 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import IconRss from "@/assets/icons/IconRss.svg";
+import LinkButton from "./LinkButton.astro";
+import Socials from "./Socials.astro";
+import config from "@/config";
+
+type Props = {
+  noMarginTop?: boolean;
+} & HTMLAttributes<"footer">;
+
+const { noMarginTop = false, class: className, ...attrs } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+const locale = Astro.currentLocale ?? config.site.lang;
+---
+
+<footer
+  class:list={["app-layout", { "mt-auto": !noMarginTop }, className]}
+  {...attrs}
+>
+  <div
+    class="border-border text-muted-foreground flex flex-col items-center justify-between border-t py-8 text-sm sm:flex-row-reverse"
+  >
+    <div class="flex items-center gap-1">
+      <Socials />
+      <LinkButton
+        href={getRelativeLocaleUrl(locale, "rss.xml")}
+        class="p-2 sm:p-1"
+        title="RSS Feed"
+        aria-label="RSS Feed"
+      >
+        <IconRss
+          class="inline-block size-6 stroke-current stroke-2 sm:scale-110"
+        />
+        <span class="sr-only">RSS Feed</span>
+      </LinkButton>
+    </div>
+    <div class="my-2 whitespace-nowrap">&#169; {currentYear} Artur Plysiuk</div>
+  </div>
+</footer>
